@@ -81,6 +81,7 @@ class Main extends PluginBase {
 	
 	public function setLastQuestion($str) {
 		$this->data->set("last.question", $str);
+		$this->data->setAll($this->data->getAll());
 		$this->data->save();
 	}
 	
@@ -92,6 +93,7 @@ class Main extends PluginBase {
 		$this->player = new config($this->getDataFolder() . "Data/" . strtolower($player) . ".yml");
 		
 		$this->player->set("vote.status", $value);
+		$this->player->setAll($this->player->getAll());
 		$this->player->save();
 	}
 	
@@ -105,6 +107,7 @@ class Main extends PluginBase {
 		$this->player = new config($this->getDataFolder() . "Data/" . strtolower($player) . ".yml");
 		
 		$this->player->set("last.question", $question);
+		$this->player->setAll($this->player->getAll());
 		$this->player->save();
 	}
 	
@@ -125,11 +128,13 @@ class Main extends PluginBase {
 	
 	public function saveYesVote() {
 		$this->config->set("yes.votes.amount", $this->getYesVotes() + 1);
+		$this->config->setAll($this->config->getAll());
 		$this->config->save();
 	}
 	
 	public function saveNoVote() {
 		$this->config->set("no.votes.amount", $this->getNoVotes() + 1);
+		$this->config->setAll($this->config->getAll());
 		$this->config->save();
 	}
 	
@@ -147,11 +152,13 @@ class Main extends PluginBase {
 	
 	public function setYesVotes($amount) {
 		return $this->config->set("yes.votes.amount", $amount);
+		$this->config->setAll($this->config->getAll());
 		$this->config->save();
 	}
 	
 	public function setNoVotes($amount) {
 		return $this->config->set("no.votes.amount", $amount);
+		$this->config->setAll($this->config->getAll());
 		$this->config->save();
 	}
 }
